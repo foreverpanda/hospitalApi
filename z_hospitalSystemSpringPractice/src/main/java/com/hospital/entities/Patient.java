@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
@@ -24,6 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity(name = "patients")
 @AttributeOverride(name = "id", column = @Column(name = "patient_id"))
+@ToString(exclude = {"tests","user"})
 public class Patient extends BaseEntity {
 
 	@Enumerated(EnumType.STRING)

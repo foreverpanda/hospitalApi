@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity(name = "appointments")
 @Table
@@ -22,6 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @AttributeOverride(name = "id" , column = @Column(name = "appointment_id"))
+@ToString(exclude = { "patient", "doctor"})
 public class appointment extends BaseEntity{
 	
 	@Column(name = "appointment_Date_Time")
