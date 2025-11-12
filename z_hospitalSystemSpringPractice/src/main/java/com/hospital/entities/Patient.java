@@ -1,5 +1,8 @@
 package com.hospital.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -7,12 +10,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Setter
 @Getter
@@ -25,16 +29,19 @@ public class Patient extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "blood_group")
 	private BloodGroup bloodGroup;
-	
-	@Column(name = "family_history" , length = 500)
+
+	@Column(name = "family_history", length = 500)
 	private String familyHistory;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
-	
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name= "user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
+
+	@ManyToMany
+	@JoinTable(name = "patient_tests", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "test_id")	)
+	Set<DiagnosticTest> tests = new HashSet<>();
+
 }
