@@ -24,7 +24,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @AttributeOverride(name = "id" , column = @Column(name = "appointment_id"))
 @ToString(exclude = { "patient", "doctor"})
-public class appointment extends BaseEntity{
+public class Appointment extends BaseEntity{
 	
 	@Column(name = "appointment_Date_Time")
 	private LocalDateTime appointmentDateTime;
